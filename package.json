@@ -1,0 +1,25 @@
+{
+  "name": "framework-builder",
+  "version": "1.0.0",
+  "description": "A tool for building .frameworks out of .so files",
+  "main": "index.js",
+  "scripts": {
+    "start": "./scripts/generate-frameworks.sh leveldown,classic-level",
+    "prepare": "cp addon.gypi node_modules/node-gyp/addon.gypi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TryQuiet/framework-builder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TryQuiet/framework-builder/issues"
+  },
+  "homepage": "https://github.com/TryQuiet/framework-builder#readme",
+  "dependencies": {
+    "classic-level": "^1.2.0",
+    "leveldown": "^6.1.1",
+    "node-gyp": "^9.3.1"
+  }
+}
