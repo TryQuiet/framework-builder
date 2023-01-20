@@ -16,15 +16,20 @@ The artifacts are being copied into `deps/{platform}/{architecture}/{package}` d
 generate-frameworks script gets three arguments: desired platform; cpu architecture to build against; comma-separated package names to iterate over and to run proper scripts for each.
 
 ## Build for iOS
+> NOTE: Currently, the only supported architecture for iOS is arm64
+
 Do `npm run start-ios` in the root directory of the project.  
 By default, the packages (`leveldown` and `classic-level`) will build against `arm64` architecture.
-
 
 As an artifacts the iOS's frameworks are generated. They can be embedded into the app bundle through xcode.  
 Additionaly, path mapping file for overriding dlopen can be found (`deps/override-dlopen-paths-data.json`).
 
 ## Build for Android
-The only prerequisite is to have Android NDK installed locally (https://developer.android.com/ndk/downloads) (version 21.4 is confirmed to be working).  
+> NOTE: Currently, the only supported architecture for Android is arm64
+
+The only <b>prerequisite</b> is to have Android NDK installed locally (https://developer.android.com/ndk/downloads) (version 21.4 is confirmed to be working).
+
+
 Don't forget to export `NDK_PATH` pointing to the installation directory (e.g. `/home/user/Android/ndk/21.4.707552`) inside the terminal you use (bash is default).  
 
 
