@@ -5,6 +5,7 @@ ARCH=$2
 
 # Delete previous artifacts
 rm -rf deps/$OS
+mkdir deps/$OS
 
 # Build binaries
 for package in ${3//,/ }; do
@@ -16,5 +17,5 @@ done
 # Generate ios .frameworks
 if [ $OS == 'ios' ]
 then
-    node $PROJECT_DIR/scripts/ios-create-plists-and-dlopen-override.js $PROJECT_DIR/node_modules
+    node $PROJECT_DIR/scripts/ios-create-plists-and-dlopen-override.js $PROJECT_DIR/node_modules $ARCH
 fi

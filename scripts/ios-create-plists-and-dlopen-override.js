@@ -3,7 +3,7 @@ const path = require('path');
 const crypto = require('crypto');
 const { spawnSync } = require('child_process');
 
-function visitEveryFramework(projectPath) {
+function visitEveryFramework(projectPath, architecture) {
   var foundFrameworks = [];
   var countInvalidFrameworks = 0;
   var countValidFrameworks = 0;
@@ -54,7 +54,7 @@ function visitEveryFramework(projectPath) {
   for (let i = 0; i < foundFrameworks.length; i++) {
     // Fill the helper fields for each framework.
     let currentFramework = foundFrameworks[i];
-    currentFramework.originalRelativePath = path.relative(projectPath,currentFramework.originalFileName);
+    currentFramework.originalRelativePath = path.join('node_modules', path.relative(projectPath,currentFramework.originalFileName));
 
     // To make each framework name unique while embedding, use a digest of the relative path.
     let hash = crypto.createHash('sha1');
@@ -113,7 +113,7 @@ function visitEveryFramework(projectPath) {
     );
   }
 
-  fs.writeFileSync(path.join(projectPath, 'deps/ios/override-dlopen-paths-data.json'), JSON.stringify(frameworkOverrideContents));
+  fs.writeFileSync(path.join(projectPath, '../deps/ios/override-dlopen-paths-data.json'), JSON.stringify(frameworkOverrideContents));
 
   // Copy runtime script that will override dlopen paths.
   // fs.copyFileSync(path.join(__dirname,'override-dlopen-paths-preload.js'),path.join(projectPath,'override-dlopen-paths-preload.js'));
@@ -121,7 +121,7 @@ function visitEveryFramework(projectPath) {
   // Copy built framework to root directory
   for (let i = 0; i < foundFrameworks.length; i++) {
     const frameworkName = foundFrameworks[i].newFrameworkName
-    fs.cpSync(foundFrameworks[i].newFrameworkFileName, path.join(projectPath, `deps/ios/${frameworkName}`, `${frameworkName}.framework`), { recursive: true })
+    fs.cpSync(foundFrameworks[i].newFrameworkFileName, path.join(projectPath, `../deps/ios/${architecture}/${frameworkName}`, `${frameworkName}.framework`), { recursive: true })
   }
 
   for (let i = 0; i < foundFrameworks.length; i++) {
@@ -132,7 +132,7 @@ function visitEveryFramework(projectPath) {
 
 if (process.argv.length >=3) {
   if (fs.existsSync(process.argv[2])) {
-    visitEveryFramework(path.normalize(process.argv[2]));
+    visitEveryFramework(path.normalize(process.argv[2]), process.argv[3]);
   }
   process.exit(0);
 } else {
