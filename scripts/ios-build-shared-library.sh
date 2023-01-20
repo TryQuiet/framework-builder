@@ -12,6 +12,9 @@ fi
 if [ $ARCH == "arm64" ]
 then
   TARGET="aarch64-apple-ios"
+else
+  echo "ERR: Provided architecture $ARCH is not supported."
+  exit 1
 fi
 
 GYP_DEFINES="OS=ios" \

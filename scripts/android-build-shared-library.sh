@@ -12,6 +12,9 @@ fi
 if [ $ARCH == "arm64" ]
 then
   TARGET="aarch64-linux-android"
+else
+  echo "ERR: Provided architecture $ARCH is not supported."
+  exit 1
 fi
 
 # Minimum sdk set in app/build.gradle
