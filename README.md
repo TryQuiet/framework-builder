@@ -8,15 +8,12 @@
    </p>
 </p>
 
-## Usage
-Do `npm run start` in the root directory of the project.
-
 ## How it works
 `node-gyp` is being used to build shared libraries against defined architecture for desired packages.  
 The artifacts are being copied into `deps/{platform}/{architecture}/{package}` directory.
 
 ## Define packages to build
-generate-frameworks script gets three arguments: desired platform; cpu architecture to build against; comma-separated package names to iterate over and run proper scripts for each.
+generate-frameworks script gets three arguments: desired platform; cpu architecture to build against; comma-separated package names to iterate over and to run proper scripts for each.
 
 ## Build for iOS
 Do `npm run start-ios` in the root directory of the project.  
