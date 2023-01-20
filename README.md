@@ -12,11 +12,27 @@
 Do `npm run start` in the root directory of the project.
 
 ## How it works
-`node-gyp` is being used to build shared libraries against defined architecture for desired packages. Then it builds iOS's frameworks that can be embedded into app bundle through xcode.
-The artifacts are being copied into `outputs/` directory, along with path mapping file for overriding dlopen (`override-dlopen-paths-data.json`).
+`node-gyp` is being used to build shared libraries against defined architecture for desired packages.  
+The artifacts are being copied into `deps/{platform}/{architecture}/{package}` directory.
 
 ## Define packages to build
-generate-frameworks scripts gets comma-separated package names as an argument. It iterates over them and runs proper scripts for each package.
+generate-frameworks script gets three arguments: desired platform; cpu architecture to build against; comma-separated package names to iterate over and run proper scripts for each.
+
+## Build for iOS
+Do `npm run start-ios` in the root directory of the project.  
+By default, the packages (`leveldown` and `classic-level`) will build against `arm64` architecture.
+
+
+As an artifacts the iOS's frameworks are generated. They can be embedded into the app bundle through xcode.  
+Additionaly, path mapping file for overriding dlopen can be found (`deps/override-dlopen-paths-data.json`).
+
+## Build for Android
+The only prerequisite is to have Android NDK installed locally (https://developer.android.com/ndk/downloads) (version 21.4 is confirmed to be working).  
+Don't forget to export `NDK_PATH` pointing to the installation directory (e.g. `/home/user/Android/ndk/21.4.707552`) inside the terminal you use (bash is default).  
+
+
+Do `npm run start-android` in the root directory of the project.  
+By default, the packages (`leveldown` and `classic-level`) will build against `arm64` architecture.
 
 <br/>
 <br/>

@@ -113,14 +113,15 @@ function visitEveryFramework(projectPath) {
     );
   }
 
-  fs.writeFileSync(path.join(projectPath, 'outputs/override-dlopen-paths-data.json'), JSON.stringify(frameworkOverrideContents));
+  fs.writeFileSync(path.join(projectPath, 'deps/ios/override-dlopen-paths-data.json'), JSON.stringify(frameworkOverrideContents));
 
   // Copy runtime script that will override dlopen paths.
   // fs.copyFileSync(path.join(__dirname,'override-dlopen-paths-preload.js'),path.join(projectPath,'override-dlopen-paths-preload.js'));
 
   // Copy built framework to root directory
   for (let i = 0; i < foundFrameworks.length; i++) {
-    fs.cpSync(foundFrameworks[i].newFrameworkFileName, path.join(projectPath, 'outputs/', foundFrameworks[i].newFrameworkName+'.framework'), { recursive: true })
+    const frameworkName = foundFrameworks[i].newFrameworkName
+    fs.cpSync(foundFrameworks[i].newFrameworkFileName, path.join(projectPath, `deps/ios/${frameworkName}`, `${frameworkName}.framework`), { recursive: true })
   }
 
   for (let i = 0; i < foundFrameworks.length; i++) {
