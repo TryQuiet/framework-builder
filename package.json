@@ -4,7 +4,8 @@
   "description": "A tool for building .frameworks out of .so files",
   "main": "index.js",
   "scripts": {
-    "start": "./scripts/generate-frameworks.sh leveldown,classic-level",
+    "start-ios": "bash ./scripts/generate-frameworks.sh ios arm64 leveldown,classic-level",
+    "start-android": "bash ./scripts/generate-frameworks.sh android arm64 leveldown,classic-level",
     "prepare": "cp addon.gypi node_modules/node-gyp/addon.gypi"
   },
   "repository": {
