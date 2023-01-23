@@ -13,7 +13,13 @@ then
   exit 1
 fi
 
-# rebuild
+# Build for electron, downloading node headers on-the-go
+# (https://www.electronjs.org/docs/latest/tutorial/using-native-node-modules#manually-building-for-electron)
+#
+# HOME=~/.electron-gyp changes where to find development headers
+# --target=1.2.3 is the version of Electron
+# --dist-url=... specifies where to download the headers
+#
 HOME=~/.electron-gyp GYP_DEFINES="OS=linux" node-gyp rebuild --target=19.0.5 --arch=$ARCH --dist-url=https://electronjs.org/headers
 
 # Copy build artifacts into the root folder
