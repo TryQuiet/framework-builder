@@ -13,11 +13,8 @@ then
   exit 1
 fi
 
-# npm rebuild
-GYP_DEFINES="OS=linux" \
-npm_config_platform="linux" \
-npm_config_arch="$ARCH" \
-npm --verbose rebuild --build-from-source
+# rebuild
+HOME=~/.electron-gyp GYP_DEFINES="OS=linux" node-gyp rebuild --target=19.0.5 --arch=$ARCH --dist-url=https://electronjs.org/headers
 
 # Copy build artifacts into the root folder
 PACKAGE_NAME="$( pwd | sed 's#.*/##')"
