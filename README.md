@@ -15,6 +15,12 @@ The artifacts are being copied into `deps/{platform}/{architecture}/{package}` d
 ## Define packages to build
 generate-frameworks script gets three arguments: desired platform; cpu architecture to build against; comma-separated package names to iterate over and to run proper scripts for each.
 
+## Build for MacOS
+Do `npm run start-macos` in the root directory of the project.  
+By default, the packages (`leveldown` and `classic-level`) will build against `x86_64` and `arm64` architectures.
+
+Resulting binary is universal, which means it covers both `x86_64` and `arm64`. Please do not change the default `universal` arch value in the script command.
+
 ## Build for iOS
 > NOTE: Currently, the only supported architecture for iOS is arm64
 

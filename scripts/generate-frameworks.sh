@@ -7,6 +7,15 @@ ARCH=$2
 rm -rf deps/$OS
 mkdir deps/$OS
 
+# Prepare proper addon.gypi for node-gyp-build
+if [ $OS == "ios" ] || [ $OS == "android" ]
+then
+  npm run apply-mobile-addon-gypi
+else
+  rm -rf node_modules/node-gyp
+  npm i
+fi
+
 # Build binaries
 for package in ${3//,/ }; do
  echo "Building $OS $ARCH shared library for $package"
