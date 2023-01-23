@@ -36,5 +36,11 @@ Don't forget to export `NDK_PATH` pointing to the installation directory (e.g. `
 Do `npm run start-android` in the root directory of the project.  
 By default, the packages (`leveldown` and `classic-level`) will build against `arm64` architecture.
 
+## Build for Linux
+> NOTE: Currently, the only supported architecture for Linux is x86-64
+
+Do `npm run start-linux` in the root directory of the project.  
+By default, the packages (`leveldown` and `classic-level`) will build against `x86-64` architecture.
+
 <br/>
 <br/>
