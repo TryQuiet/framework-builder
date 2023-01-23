@@ -16,12 +16,15 @@ The artifacts are being copied into `deps/{platform}/{architecture}/{package}` d
 generate-frameworks script gets three arguments: desired platform; cpu architecture to build against; comma-separated package names to iterate over and to run proper scripts for each.
 
 ## Build for MacOS
+> NOTE: You must use machine running MacOS to build for MacOS.
+
 Do `npm run start-macos` in the root directory of the project.  
 By default, the packages (`leveldown` and `classic-level`) will build against `x86_64` and `arm64` architectures.
 
 Resulting binary is universal, which means it covers both `x86_64` and `arm64`. Please do not change the default `universal` arch value in the script command.
 
 ## Build for iOS
+> NOTE: You must use machine running MacOS to build for iOS.
 > NOTE: Currently, the only supported architecture for iOS is arm64
 
 Do `npm run start-ios` in the root directory of the project.  
@@ -31,6 +34,7 @@ As an artifacts the iOS's frameworks are generated. They can be embedded into th
 Additionaly, path mapping file for overriding dlopen can be found (`deps/override-dlopen-paths-data.json`).
 
 ## Build for Android
+> NOTE: You must use machine running Linux to build for Android.
 > NOTE: Currently, the only supported architecture for Android is arm64
 
 The only <b>prerequisite</b> is to have Android NDK installed locally (https://developer.android.com/ndk/downloads) (version 21.4 is confirmed to be working).
@@ -43,6 +47,7 @@ Do `npm run start-android` in the root directory of the project.
 By default, the packages (`leveldown` and `classic-level`) will build against `arm64` architecture.
 
 ## Build for Linux
+> NOTE: You must use machine running Linux to build for Linux.
 > NOTE: Currently, the only supported architecture for Linux is x86-64
 
 Do `npm run start-linux` in the root directory of the project.  
