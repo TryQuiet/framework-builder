@@ -6,7 +6,8 @@
   "scripts": {
     "start-ios": "bash ./scripts/generate-frameworks.sh ios arm64 leveldown,classic-level",
     "start-android": "bash ./scripts/generate-frameworks.sh android arm64 leveldown,classic-level",
-    "prepare": "cp addon.gypi node_modules/node-gyp/addon.gypi"
+    "start-macos": "bash ./scripts/generate-frameworks.sh macos universal leveldown,classic-level",
+    "apply-mobile-addon-gypi": "cp addon.gypi node_modules/node-gyp/addon.gypi"
   },
   "repository": {
     "type": "git",
