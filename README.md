@@ -12,6 +12,15 @@
 `node-gyp` is being used to build shared libraries against defined architecture for desired packages.  
 The artifacts are being copied into `deps/{platform}/{architecture}/{package}` directory.
 
+
+Each build uses dedicated nodejs headers. Mobile platforms (iOS, Android) gets them from `nodedir` directory that is present in this repository, and should be manually updated along with the nodejs used on the platform.  
+Desktop platforms (MacOS, Linux, Windows) downloads electron's nodejs headers on-the-go. Command that rebuilds the packages takes electron version as an argument - it's the same version as the one installed in this repo's `node_modules`.  
+Make sure to install the same electron you'll be using in the project you build the libraries for!
+
+## Testing
+Built binaries can easily be tested against working with electron. Build libraries for one of desired desktop platforms, and run `test` command from within `test-binaries` subproject. As a result, you should see error-free command line output, and a 'dummy' database files present under the subproject's directory.  
+(In the test, a `leveldown` binary is being put under pressure).
+
 ## Define packages to build
 generate-frameworks script gets three arguments: desired platform; cpu architecture to build against; comma-separated package names to iterate over and to run proper scripts for each.
 

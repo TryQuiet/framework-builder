@@ -22,6 +22,7 @@
   "homepage": "https://github.com/TryQuiet/framework-builder#readme",
   "dependencies": {
     "classic-level": "^1.2.0",
+    "electron": "19.0.5",
     "leveldown": "^6.1.1",
     "node-gyp": "^9.3.1"
   }
