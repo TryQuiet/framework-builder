@@ -21,6 +21,7 @@ jobs:
 
       - name: Test
         run: |
+          export DISPLAY=192.168.0.5:0.0
           cd test
           npm run test
 
