@@ -21,7 +21,7 @@ Make sure to install <b>the same electron</b> you'll be using in the <b>project 
 
 
 ## Parameters
-generate-frameworks script gets three arguments: 
+`build.sh` script gets three arguments: 
 * desired platform  
 * cpu architecture to build against  
 * comma-separated package names to iterate over and to run proper scripts for each
@@ -81,7 +81,7 @@ set HOME=~/.electron-gyp GYP_DEFINES=\"include_os=win32 OS=linux\" && cd $PACKAG
 
 
 ## Testing
-Built binaries can easily be tested against working with electron. Build libraries for one of desired desktop platforms, and run `test` command from within `test-binaries` subproject.
+Built binaries can easily be tested against working with electron. Build libraries for one of desired desktop platforms, and run `test` command from within `test` subproject.
 
 
 As a result you should see error-free command line output and a `dummy` database files present under the subproject's directory.  

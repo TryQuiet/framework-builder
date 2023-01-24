@@ -20,11 +20,11 @@ fi
 for package in ${3//,/ }; do
  echo "Building $OS $ARCH shared library for $package"
  rm -rf $PROJECT_DIR/node_modules/$package/build
- cd $PROJECT_DIR/node_modules/$package && ../../scripts/$OS-build-shared-library.sh $ARCH
+ cd $PROJECT_DIR/node_modules/$package && $PROJECT_DIR/build-binaries/$OS.sh $ARCH
 done
 
 # Generate ios .frameworks
 if [ $OS == 'ios' ]
 then
-    node $PROJECT_DIR/scripts/ios-create-plists-and-dlopen-override.js $PROJECT_DIR/node_modules $ARCH
+    node $PROJECT_DIR/ios-frameworks/ios-create-plists-and-dlopen-override.js $PROJECT_DIR/node_modules $ARCH
 fi
