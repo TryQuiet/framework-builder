@@ -1,0 +1,45 @@
+name: Build and test binary
+
+on:
+  pull_request:
+
+jobs:
+  linux:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build
+        run: npm run start-linux
+
+      - name: Prepare test
+        run: |
+          cd test
+          rm -rf dummy
+          npm i
+
+      - name: Test
+        run: |
+          cd test
+          npm run test
+
+      - name: Compress deps
+        run: |
+          zip -r linux.zip ./deps/linux/*
+
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload artifacts
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./linux.zip
+          asset_name: linux.zip
+          asset_content_type: application/zip
