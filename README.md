@@ -69,6 +69,17 @@ Do `npm run start-linux` in the root directory of the project.
 By default, the packages (`leveldown` and `classic-level`) will build against `x86-64` architecture.
 
 
+## Build for Windows
+Unfortunatelly building for Windows is not automated in this tool.  
+However, it is confirmed that prebuilds shipped with `leveldown` and `classic-level` works with electron.
+
+
+If one wants to rebuild the package anyway, the following command works when executed from within the Windows powered machine (with the development environment set up – see https://visualstudio.microsoft.com/)
+```
+set HOME=~/.electron-gyp GYP_DEFINES=\"include_os=win32 OS=linux\" && cd $PACKAGE && node-gyp rebuild --target=$ELECTRON --dist-url=https://electronjs.org/headers
+```
+
+
 ## Testing
 Built binaries can easily be tested against working with electron. Build libraries for one of desired desktop platforms, and run `test` command from within `test-binaries` subproject.
 
