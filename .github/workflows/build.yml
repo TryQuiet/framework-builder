@@ -13,6 +13,9 @@ jobs:
       - name: Build
         run: npm run start-linux
 
+      - name: Install libs
+        run: sudo apt-get update && sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
       - name: Prepare test
         run: |
           cd test
@@ -21,7 +24,6 @@ jobs:
 
       - name: Test
         run: |
-          export DISPLAY=192.168.0.5:0.0
           cd test
           npm run test
 
@@ -30,10 +32,7 @@ jobs:
           zip -r linux.zip ./deps/linux/*
 
       - name: Upload artifacts
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+        uses: actions/upload-artifact@v2
         with:
-          asset_path: ./linux.zip
-          asset_name: linux.zip
-          asset_content_type: application/zip
+          name: linux.zip
+          path: ./linux.zip
