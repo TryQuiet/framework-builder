@@ -13,11 +13,17 @@ then
   exit 1
 fi
 
-# npm rebuild
-GYP_DEFINES="OS=linux" \
-npm_config_platform="linux" \
-npm_config_arch="$ARCH" \
-npm --verbose rebuild --build-from-source
+ELECTRON="$( awk -F'"' '/"version": ".+"/{ print $4; exit; }' ../electron/package.json )"
+echo "Building for electron@$ELECTRON"
+
+# Build for electron, downloading node headers on-the-go
+# (https://www.electronjs.org/docs/latest/tutorial/using-native-node-modules#manually-building-for-electron)
+#
+# HOME=~/.electron-gyp changes where to find development headers
+# --target=1.2.3 is the version of Electron
+# --dist-url=... specifies where to download the headers
+#
+HOME=~/.electron-gyp GYP_DEFINES="OS=linux" node-gyp rebuild --target=$ELECTRON --arch=$ARCH --dist-url=https://electronjs.org/headers
 
 # Copy build artifacts into the root folder
 PACKAGE_NAME="$( pwd | sed 's#.*/##')"

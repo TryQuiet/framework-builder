@@ -1,0 +1,7 @@
+{
+  "name": "framework-builder-test",
+  "main": "index.js",
+  "scripts": {
+    "test": "PREBUILDS_ONLY=false electron ."
+  }
+}
