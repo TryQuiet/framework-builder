@@ -31,12 +31,12 @@ jobs:
 
       - name: Compress deps
         run: |
-          zip -r deps.zip ./deps/*
+          zip -r deps.zip ./deps/android
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: deps.zip
+          name: deps-android.zip
           path: ./deps.zip
 
   linux:
@@ -71,10 +71,10 @@ jobs:
 
       - name: Compress deps
         run: |
-          zip -r deps.zip ./deps/*
+          zip -r deps.zip ./deps/linux
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: deps.zip
-          path: ./deps.zip
+          path: ./deps-linux.zip
