@@ -7,6 +7,8 @@ jobs:
   android:
     runs-on: ubuntu-20.04
 
+    timeout-minutes: 10
+
     steps:
       - uses: actions/checkout@v3
 
@@ -22,11 +24,10 @@ jobs:
           ndk-version: r21e
           add-to-path: false
 
-      env:
-        NDK_PATH: ${{ steps.setup-ndk.outputs.ndk-path }}
-
       - name: Build
         run: npm run start-android
+        env:
+          NDK_PATH: ${{ steps.setup-ndk.outputs.ndk-path }}
 
   linux:
     runs-on: ubuntu-20.04
