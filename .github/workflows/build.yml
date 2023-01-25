@@ -1,0 +1,91 @@
+name: Build and test binary
+
+on:
+  pull_request:
+
+jobs:
+  android:
+    runs-on: ubuntu-20.04
+
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+        with:
+          source-path: linux
+
+      - name: Setup NDK
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: r21e
+          add-to-path: false
+
+      - name: Build
+        run: npm run start-android
+        env:
+          NDK_PATH: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+      - name: Compress deps
+        run: |
+          zip -r deps.zip ./deps/android
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: deps-android.zip
+          path: ./deps.zip
+
+  linux:
+    runs-on: ubuntu-20.04
+
+    timeout-minutes: 10
+
+    env:
+      DISPLAY: ":99.0"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+        with:
+          source-path: linux
+
+      - name: Install WM
+        run: sudo apt install fluxbox
+        shell: bash
+
+      - name: Run X11
+        run: |
+          Xvfb :99 -screen 0 1920x1080x24 &
+          sleep 3
+          fluxbox &
+        shell: bash
+
+      - name: Build
+        run: npm run start-linux
+
+      - name: Prepare test
+        run: |
+          cd test
+          rm -rf dummy
+          npm i
+
+      - name: Test
+        run: |
+          cd test
+          npm run test
+
+      - name: Compress deps
+        run: |
+          zip -r deps.zip ./deps/linux
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: deps-linux.zip
+          path: ./deps.zip
