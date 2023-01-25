@@ -7,11 +7,19 @@ jobs:
   linux:
     runs-on: ubuntu-20.04
 
+    timeout-minutes: 10
+
+    env:
+      DISPLAY: ":99.0"
+
     steps:
       - uses: actions/checkout@v2
 
       - name: Build
         run: npm run start-linux
+
+      - name: Install WM
+        run: sudo apt install fluxbox
 
       - name: Run X11
         run: |
