@@ -1,0 +1,25 @@
+name: 'Setup environment'
+
+inputs:
+  source-path:
+    description: 'OS name (linux | darwin | win32)'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@master
+      with:
+        node-version: 16.18.0
+
+    - name: Install WM
+      run: sudo apt install fluxbox
+
+    - name: Run X11
+      run: |
+        Xvfb :99 -screen 0 1920x1080x24 &
+        sleep 3
+        fluxbox &
+
+    - name: Install npm dependencies
+      run: npm ci
