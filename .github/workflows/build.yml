@@ -55,6 +55,17 @@ jobs:
         with:
           source-path: linux
 
+      - name: Install WM
+        run: sudo apt install fluxbox
+        shell: bash
+
+      - name: Run X11
+        run: |
+          Xvfb :99 -screen 0 1920x1080x24 &
+          sleep 3
+          fluxbox &
+        shell: bash
+
       - name: Build
         run: npm run start-linux
 
@@ -76,5 +87,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: deps.zip
-          path: ./deps-linux.zip
+          name: deps-linux.zip
+          path: ./deps.zip
