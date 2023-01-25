@@ -61,6 +61,7 @@ jobs:
 
   upload-artifacts:
     runs-on: ubuntu-20.04
+    needs: [android, linux]
 
     steps:
       - uses: actions/checkout@v3

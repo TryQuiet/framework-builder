@@ -14,12 +14,16 @@ runs:
 
     - name: Install WM
       run: sudo apt install fluxbox
+      shell: bash
+
 
     - name: Run X11
       run: |
         Xvfb :99 -screen 0 1920x1080x24 &
         sleep 3
         fluxbox &
+      shell: bash
 
     - name: Install npm dependencies
       run: npm ci
+      shell: bash
