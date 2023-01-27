@@ -10,7 +10,8 @@ mkdir deps/$OS
 # Prepare proper addon.gypi for node-gyp-build
 if [ $OS == "ios" ] || [ $OS == "android" ]
 then
-  npm run apply-mobile-addon-gypi
+  rm -rf node_modules/node-gyp
+  cp -rf node_modules/nodejs-mobile-gyp node_modules/node-gyp
 else
   rm -rf node_modules/node-gyp
   npm i
