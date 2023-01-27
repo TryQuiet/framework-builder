@@ -59,9 +59,11 @@ function visitEveryFramework(projectPath, architecture) {
     // To make each framework name unique while embedding, use a digest of the relative path.
     let hash = crypto.createHash('sha1');
     hash.update(currentFramework.originalRelativePath);
-    const splittedPath = currentFramework.originalFileName.split('/');
-    packageName = splittedPath[splittedPath.length-1].split('.')[0];
-    currentFramework.newFrameworkName = packageName.replace('_', '-');
+    const { 
+      frameworkName, 
+      binaryName 
+    } = getFrameworkName(currentFramework)
+    currentFramework.newFrameworkName = frameworkName;
     currentFramework.newFrameworkFileName = path.join(path.dirname(currentFramework.originalFileName),currentFramework.newFrameworkName+'.framework');
   }
 
@@ -105,9 +107,13 @@ function visitEveryFramework(projectPath, architecture) {
   for (let i = 0; i < foundFrameworks.length; i++) {
     // Generate the contents of a JSON file for overriding dlopen calls at runtime.
     let currentFramework = foundFrameworks[i];
+    const { 
+      frameworkName, 
+      binaryName 
+    } = getFrameworkName(currentFramework)
     frameworkOverrideContents.push(
       {
-        originalpath: currentFramework.originalRelativePath.split(path.sep),
+        originalpath: `deps/ios/arm64/${frameworkName}/${binaryName}.node`.split(path.sep),
         newpath: ['..', 'Frameworks', currentFramework.newFrameworkName+'.framework', currentFramework.newFrameworkName]
       }
     );
@@ -138,4 +144,14 @@ if (process.argv.length >=3) {
 } else {
   console.error("A path is expected as an argument.");
   process.exit(1);
+}
+
+function getFrameworkName(currentFramework) {
+  const splittedPath = currentFramework.originalFileName.split('/');
+  binaryName = splittedPath[splittedPath.length-1].split('.')[0];
+  frameworkName = binaryName.replace('_', '-');
+  return {
+    binaryName,
+    frameworkName
+  }
 }

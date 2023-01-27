@@ -31,7 +31,7 @@ Make sure to install <b>the same electron</b> you'll be using in the <b>project 
 > NOTE: You must use machine running MacOS to build for MacOS.
 
 Do `npm run start-macos` in the root directory of the project.  
-By default, the packages (`leveldown` and `classic-level`) will build against `x86_64` and `arm64` architectures.
+By default, the packages (`classic-level`) will build against `x86_64` and `arm64` architectures.
 
 Resulting binary is universal, which means it covers both `x86_64` and `arm64`. Please do not change the default `universal` arch value in the script command.
 
@@ -41,7 +41,7 @@ Resulting binary is universal, which means it covers both `x86_64` and `arm64`. 
 > NOTE: Currently, the only supported architecture for iOS is arm64
 
 Do `npm run start-ios` in the root directory of the project.  
-By default, the packages (`leveldown` and `classic-level`) will build against `arm64` architecture.
+By default, the packages (`classic-level`) will build against `arm64` architecture.
 
 As an artifacts the iOS's frameworks are generated. They can be embedded into the app bundle through xcode.  
 Additionaly, path mapping file for overriding dlopen can be found (`deps/override-dlopen-paths-data.json`).
@@ -58,7 +58,7 @@ Don't forget to export `NDK_PATH` pointing to the installation directory (e.g. `
 
 
 Do `npm run start-android` in the root directory of the project.  
-By default, the packages (`leveldown` and `classic-level`) will build against `arm64` architecture.
+By default, the packages (`classic-level`) will build against `arm64` architecture.
 
 
 ## Build for Linux
@@ -66,12 +66,12 @@ By default, the packages (`leveldown` and `classic-level`) will build against `a
 > NOTE: Currently, the only supported architecture for Linux is x86-64
 
 Do `npm run start-linux` in the root directory of the project.  
-By default, the packages (`leveldown` and `classic-level`) will build against `x86-64` architecture.
+By default, the packages (`classic-level`) will build against `x86-64` architecture.
 
 
 ## Build for Windows
 Unfortunatelly building for Windows is not automated in this tool.  
-However, it is confirmed that prebuilds shipped with `leveldown` and `classic-level` works with electron.
+However, it is confirmed that prebuilds shipped with `classic-level` works with electron.
 
 
 If one wants to rebuild the package anyway, the following command works when executed from within the Windows powered machine (with the development environment set up – see https://visualstudio.microsoft.com/)
@@ -85,7 +85,7 @@ Built binaries can easily be tested against working with electron. Build librari
 
 
 As a result you should see error-free command line output and a `dummy` database files present under the subproject's directory.  
-(In the test, a `leveldown` binary is being put under pressure).
+(In the test, a `classic-level` binary is being put under pressure).
 
 
 <br/>
