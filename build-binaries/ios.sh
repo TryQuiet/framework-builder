@@ -11,7 +11,10 @@ fi
 # Choose proper target basing on architecture we build against
 if [ $ARCH == "arm64" ]
 then
-  TARGET="aarch64-apple-ios"
+  TARGET="x64"
+elif [ $ARCH == "x64" ]
+then
+  TARGET="x86_64-apple-ios"
 else
   echo "ERR: Provided architecture $ARCH is not supported."
   exit 1
