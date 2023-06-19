@@ -4,7 +4,7 @@
   "description": "A tool for building .frameworks out of .so files",
   "main": "index.js",
   "scripts": {
-    "start-ios": "bash ./build.sh ios arm64 classic-level",
+    "start-ios": "bash ./build.sh ios universal classic-level",
     "start-macos": "bash ./build.sh macos universal classic-level",
     "start-android": "bash ./build.sh android arm64 classic-level",
     "start-linux": "bash ./build.sh linux x86-64 classic-level",

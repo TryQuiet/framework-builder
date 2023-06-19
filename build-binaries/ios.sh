@@ -11,7 +11,7 @@ fi
 # Choose proper target basing on architecture we build against
 if [ $ARCH == "arm64" ]
 then
-  TARGET="x64"
+  TARGET="aarch64-apple-ios"
 elif [ $ARCH == "x64" ]
 then
   TARGET="x86_64-apple-ios"

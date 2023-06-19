@@ -38,13 +38,16 @@ Resulting binary is universal, which means it covers both `x86_64` and `arm64`. 
 
 ## Build for iOS
 > NOTE: You must use machine running MacOS to build for iOS.
-> NOTE: Currently, the only supported architecture for iOS is arm64
 
 Do `npm run start-ios` in the root directory of the project.  
-By default, the packages (`classic-level`) will build against `arm64` architecture.
+By default, the packages (`classic-level`) will build against `universal` architecture.
+
+> NOTE: `universal` binary is a combination of `x86_64` and `arm64`.
 
 As an artifacts the iOS's frameworks are generated. They can be embedded into the app bundle through xcode.  
 Additionaly, path mapping file for overriding dlopen can be found (`deps/override-dlopen-paths-data.json`).
+
+> !IMPORTANT: For the `universal` architecture, `override-dlopen-paths-data` should be updated manually.
 
 
 ## Build for Android
