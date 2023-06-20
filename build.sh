@@ -57,7 +57,7 @@ then
       cp -rn $PROJECT_DIR/deps/$OS/$arch/$package/$package.framework/$package $DEST/$package-$arch
     done
 
-    cd $DEST && lipo -create -output classic-level classic-level-x64 classic-level-arm64
+    cd $DEST && lipo -create -output $package $package-${ARCHS[0]} $package-${ARCHS[1]}
     
     # Cleanup
     for arch in ${ARCHS[@]}; do
