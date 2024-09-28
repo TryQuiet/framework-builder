@@ -3,5 +3,8 @@
   "main": "index.js",
   "scripts": {
     "test": "PREBUILDS_ONLY=false electron ."
+  },
+  "dependencies": {
+    "electron": "19.0.5"
   }
 }
