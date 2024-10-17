@@ -23,7 +23,9 @@ echo "Building for electron@$ELECTRON"
 # --target=1.2.3 is the version of Electron
 # --dist-url=... specifies where to download the headers
 #
-HOME=~/.electron-gyp GYP_DEFINES="OS=mac" node-gyp rebuild --target=$ELECTRON --dist-url=https://electronjs.org/headers
+# node-gyp configure --verbose
+# HOME=~/.electron-gyp GYP_DEFINES="OS=mac" node-gyp rebuild --target=$ELECTRON --dist-url=https://electronjs.org/headers
+npm run build
 
 # Copy build artifacts into the root folder
 PACKAGE_NAME="$( pwd | sed 's#.*/##')"

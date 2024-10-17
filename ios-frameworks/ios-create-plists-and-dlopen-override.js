@@ -4,16 +4,19 @@ const crypto = require('crypto');
 const { spawnSync } = require('child_process');
 
 function visitEveryFramework(projectPath, architecture) {
-  var foundFrameworks = [];
-  var countInvalidFrameworks = 0;
-  var countValidFrameworks = 0;
+  const foundFrameworks = [];
+  let countInvalidFrameworks = 0;
+  let countValidFrameworks = 0;
+
   function recursivelyFindFrameworks(currentPath) {
     let currentFiles = fs.readdirSync(currentPath);
     for (let i = 0; i < currentFiles.length; i++) {
       let currentFilename = path.normalize(path.join(currentPath,currentFiles[i]));
+
       if (fs.lstatSync(currentFilename).isDirectory()) {
         if (currentFilename.endsWith(".node")) {
           let frameworkContents = fs.readdirSync(currentFilename);
+          console.log('framework contents', JSON.stringify(frameworkContents));
           // Frameworks output by nodejs-mobile-gyp are expected to have only one file inside, corresponding to the proper shared library.
           if (frameworkContents.length != 1) {
             console.log('Skipping a ".node". Expected to find only one file inside this path: ' + currentFilename);
@@ -43,6 +46,7 @@ function visitEveryFramework(projectPath, architecture) {
       }
     }
   }
+  
   recursivelyFindFrameworks(projectPath);
 
   console.log("Found " + countValidFrameworks + " valid frameworks and " + countInvalidFrameworks + " invalid frameworks after rebuilding the native modules for iOS.");
@@ -50,6 +54,8 @@ function visitEveryFramework(projectPath, architecture) {
     console.log("No valid framework native modules were found. Skipping integrating them into the App.");
     return;
   }
+
+  console.log(`Found frameworks`, JSON.stringify(foundFrameworks))
 
   for (let i = 0; i < foundFrameworks.length; i++) {
     // Fill the helper fields for each framework.
@@ -119,7 +125,7 @@ function visitEveryFramework(projectPath, architecture) {
     );
   }
 
-  fs.writeFileSync(path.join(projectPath, '../deps/ios/override-dlopen-paths-data.json'), JSON.stringify(frameworkOverrideContents));
+  fs.writeFileSync(path.join(projectPath, '../../deps/ios/override-dlopen-paths-data.json'), JSON.stringify(frameworkOverrideContents));
 
   // Copy runtime script that will override dlopen paths.
   // fs.copyFileSync(path.join(__dirname,'override-dlopen-paths-preload.js'),path.join(projectPath,'override-dlopen-paths-preload.js'));
@@ -127,7 +133,7 @@ function visitEveryFramework(projectPath, architecture) {
   // Copy built framework to root directory
   for (let i = 0; i < foundFrameworks.length; i++) {
     const frameworkName = foundFrameworks[i].newFrameworkName
-    fs.cpSync(foundFrameworks[i].newFrameworkFileName, path.join(projectPath, `../deps/ios/${architecture}/${frameworkName}`, `${frameworkName}.framework`), { recursive: true })
+    fs.cpSync(foundFrameworks[i].newFrameworkFileName, path.join(projectPath, `../../deps/ios/${architecture}/${frameworkName}`, `${frameworkName}.framework`), { recursive: true })
   }
 
   for (let i = 0; i < foundFrameworks.length; i++) {

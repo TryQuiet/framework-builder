@@ -1,0 +1,9 @@
+--- CMakeLists.txt	2024-10-17 10:28:28
++++ ../../ios-cmake/cmakelist.txt	2024-10-17 10:29:01
+@@ -86,4 +86,4 @@
+     list(APPEND LINK_LIBRARIES crypt32.lib)
+ endif()
+ 
+-target_link_libraries(${PROJECT_NAME} PRIVATE ${LINK_LIBRARIES})
++target_link_libraries(${PROJECT_NAME} PUBLIC ${LINK_LIBRARIES})
+\ No newline at end of file

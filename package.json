@@ -1,13 +1,13 @@
 {
   "name": "framework-builder",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A tool for building .frameworks out of .so files",
   "main": "index.js",
   "scripts": {
-    "start-ios": "bash ./build.sh ios xcframework classic-level",
-    "start-macos": "bash ./build.sh macos universal classic-level",
-    "start-android": "bash ./build.sh android arm64 classic-level",
-    "start-linux": "bash ./build.sh linux x86-64 classic-level",
+    "start-ios": "bash ./build.sh ios xcframework node-datachannel",
+    "start-macos": "bash ./build.sh macos universal node-datachannel",
+    "start-android": "bash ./build.sh android arm64 classic-level,node-datachannel",
+    "start-linux": "bash ./build.sh linux x86-64 classic-level,node-datachannel",
     "apply-mobile-addon-gypi": "cp addon.gypi node_modules/node-gyp/addon.gypi"
   },
   "repository": {
@@ -22,9 +22,10 @@
   "homepage": "https://github.com/TryQuiet/framework-builder#readme",
   "dependencies": {
     "classic-level": "^1.2.0",
-    "electron": "19.0.5",
+    "electron": "^23.0.0",
     "leveldown": "^6.1.1",
+    "node-datachannel": "0.12.0",
     "node-gyp": "^9.3.1",
-    "nodejs-mobile-gyp": "^0.3.1"
+    "nodejs-mobile-gyp": "^0.4.0"
   }
 }
